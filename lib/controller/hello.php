@@ -7,7 +7,7 @@ class Hello extends Contr {
     $this->render( array( 'txt' => 'Hello World.' ), 'hello' );
   }
   
-  // index.php/hello/parameter
+  // index.php/hello/func/parameter
   function func( $parameter = '' ) {
     $this->render( array( 'txt' => $parameter ), 'hello' );
   }
