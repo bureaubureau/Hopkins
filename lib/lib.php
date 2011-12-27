@@ -91,8 +91,10 @@ class Contr {
     $this->show_404();
   }
   
-  function helper($name) {
-    include( realpath( $global['base_path'] . '/lib/helper/'. $name . '.php' ) );
+  function helper( $name ) {
+    global $global;
+    
+    include( realpath( $global['server_path'] . '/lib/helper/'. $name . '.php' ) );
   }
   
   function index() {
@@ -109,13 +111,13 @@ class Contr {
     
     $args = func_get_args();
     
-    if ( count($args) <= 1 ) {
-      $files[] = $args[0];
+    if ( count( $args ) <= 1 ) {
+      $files[] = $args[ 0 ];
     } 
     else {
-      $data = $args[0];
+      $data = $args[ 0 ];
       extract( $data );
-      unset( $args[0] );
+      unset( $args[ 0 ] );
       $files = $args;
     }
     
