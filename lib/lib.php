@@ -14,7 +14,7 @@ class Lib {
       $this->options[$key] = $value;
     }
     
-    $path = scandir( realpath( $global['server_path'] . '/lib/controller/' ) );
+    $path = scandir( realpath( $global['server_path'] . '/app/controller/' ) );
     foreach ( $path as $dir ) {
       if ( $dir != '.' && $dir != '..' ) {
         $dir = substr($dir, 0, strpos($dir, '.'));
@@ -49,7 +49,7 @@ class Lib {
     header( "Content-type: text/html; charset={utf-8}" );
     
     if ( !$global['path'] ) {
-      include( realpath( $global['server_path'] . '/lib/controller/'. $global['index'] . '.php' ) );
+      include( realpath( $global['server_path'] . '/app/controller/'. $global['index'] . '.php' ) );
       $reflection = new ReflectionClass( $global['index'] );
       return $reflection->newInstance( $this->options, NULL );
     }
@@ -60,7 +60,7 @@ class Lib {
         if ( $route == $path[0] ) {
           $args = array_slice( $path, 1 );
 
-          include( realpath( $global['server_path'] . '/lib/controller/'. $class . '.php' ) );
+          include( realpath( $global['server_path'] . '/app/controller/'. $class . '.php' ) );
           $reflection = new ReflectionClass( $class );
           return $reflection->newInstance( $this->options, $args );
         }
@@ -94,7 +94,7 @@ class Contr {
   function helper( $name ) {
     global $global;
     
-    include( realpath( $global['server_path'] . '/lib/helper/'. $name . '.php' ) );
+    include( realpath( $global['server_path'] . '/app/helper/'. $name . '.php' ) );
   }
   
   function index() {
@@ -122,7 +122,7 @@ class Contr {
     }
     
     foreach ( $files as $file ) {
-      $view[] = realpath( $global['server_path'] . '/lib/views/' . $file . '.php' );
+      $view[] = realpath( $global['server_path'] . '/app/views/' . $file . '.php' );
     }
 
     ob_start();
